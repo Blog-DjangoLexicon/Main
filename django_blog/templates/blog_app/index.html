@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends "blog_app/base.html" %}
+
+{% load staticfiles %}
+
+
+{% load static %}
+{% block title %}Blogged Project - Group 5{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card" style="width: 18rem;">
+                <img src="{% static 'images/signup.jpg' %}" style="height: 200px;"  class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text"><a href="{% url 'blog_app:registration' %}">SIGNUP!</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card" style="width: 18rem;">
+                <img src="{% static 'images/login.jpg' %}" style="height: 200px;" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text"><a href="{% url 'blog_app:user_login' %}">LOGIN!</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

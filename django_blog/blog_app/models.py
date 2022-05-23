@@ -9,8 +9,10 @@ STATUS = (
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
+    # author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='')
     content = models.TextField()
-    status = models.IntegerField(choices=STATUS, defualt=0)
+    created_on = models.DateTimeField(auto_now_add=True)
+    status = models.IntegerField(choices=STATUS, default=0)
 
     def __str__(self):
         return self.title

@@ -4,6 +4,13 @@ from django.conf import settings
 from PIL import Image
 # Create your models here.
 
+STATUS = (
+
+    (0, 'Draft'),
+
+    (1, 'Published')
+
+)
 
 class UserProfileInfo(models.Model):
 
@@ -16,3 +23,20 @@ class UserProfileInfo(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class Post(models.Model):
+
+    title = models.CharField(max_length=200, unique=True)
+
+    content = models.TextField()
+
+    status = models.IntegerField(choices=STATUS, default=0)
+
+    created_on = models.DateTimeField(auto_now_add=True)
+
+
+
+    def __str__(self):
+
+        return self.title

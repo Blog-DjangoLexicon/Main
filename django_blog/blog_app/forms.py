@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from blog_app.models import UserProfileInfo
+from blog_app.models import UserProfileInfo, Post
 
 
 
@@ -17,3 +17,9 @@ class UserProfileInfoForm(forms.ModelForm):
         model = UserProfileInfo
         fields = ['profile_pic']
 
+
+class PostForm(forms.ModelForm):
+    class Meta():
+        model = Post
+        exclude = ['author']
+        fields = ['title',  'content', 'status']

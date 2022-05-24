@@ -27,6 +27,10 @@
     </div >
     {% for post in post_list %}
     <div class="card-body">
+     
+
+      <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
+
       <h2 class="card-title">{{ post.content }}</h2>
 
     </div>

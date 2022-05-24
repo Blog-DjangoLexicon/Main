@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-
+from blog_app.models import Post
 from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
@@ -17,7 +17,9 @@ def index(request):
 
 @login_required
 def user_profile(request):
-    return render(request, 'blog_app/user_profile.html')
+    queryset = Post.objects.filter(status=1)
+    post_dict = {'post_list': queryset}
+    return render(request, 'blog_app/user_profile.html', context=post_dict)
 
 @login_required
 def user_logout(request):

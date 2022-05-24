@@ -1,0 +1,11 @@
+{% extends "blog_app/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<h2> {{ post.title }}</h2>
+<small>By: {{ post.author.first_name }}</small><br>
+<hr>
+<br>
+{{ post.content }}
+{% endblock %}

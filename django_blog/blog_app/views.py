@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from blog_app.forms import UserForm, UserProfileInfoForm
-from django.contrib import messages
+from blog_app.models import Post
+from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -9,6 +10,15 @@ from blog_app.models import Post
 from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
+
+class ArticleDetailView(DetailView):
+    model = Post
+    template_name = 'blog_app/article.html'
+
+class AddPostView(CreateView):
+    model =Post
+    template_name = 'blog_app/addpost.html'
+    fields = '__all__'
 
 
 def index(request):

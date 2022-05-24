@@ -11,9 +11,10 @@ from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 
-class ArticleDetailView(DetailView):
-    model = Post
-    template_name = 'blog_app/article.html'
+# class ArticleDetailView(DetailView):
+#     model = Post
+#     template_name = 'blog_app/article.html'
+    
 
 class AddPostView(CreateView):
     model =Post

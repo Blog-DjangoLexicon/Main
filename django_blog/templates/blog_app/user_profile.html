@@ -11,6 +11,7 @@
             <h3>First Name: {{ request.user.first_name }}</h3>
             <h3>Last Name: {{ request.user.last_name }}</h3>
             <p class="text-secondary">{{ user.email }}</p>
+            <img class="rounded-circle article-img" src="{{ user.userprofileinfo.profile_pic.url }}" width='240' alt={{user}}>
         </div>
       </div>
       <!-- FORM HERE -->
@@ -21,18 +22,17 @@
             {{ u_form }} <!-- User form -->
             {{ p_form }} <!-- Profile form -->
         </fieldset>
-        <img class="rounded-circle article-img" src="{{ user.userprofileinfo.profile_pic.url }}" width='240' alt={{user}}>
+        
         
     </form>
     </div >
     {% for post in post_list %}
     <div class="card-body">
-     
-     
-
-      <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
+ 
+       <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
 
       <h2 class="card-title">{{ post.content }}</h2>
+      <br><br>
 
     </div>
   {% endfor %}

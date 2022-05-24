@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 from PIL import Image
+from django.shortcuts import render
+from django.shortcuts import redirect
 from django.urls import reverse
 # Create your models here.
 
@@ -45,4 +47,4 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('article', args=(str(self.id)))
+        return reverse('user_profile')

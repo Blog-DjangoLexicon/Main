@@ -29,7 +29,7 @@
 
 {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'blog_app:user_login' %}">Hi {{ user.username }}!</a>
+          <a class="nav-link" href="{% url 'user_profile' %}">Hi {{ user.username }}!</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'logout' %}">Logout</a>

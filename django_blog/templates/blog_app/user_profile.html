@@ -5,7 +5,7 @@
 {% block content %}
     <div class="content-section">
       <div class="media">
-        <legend class="border-bottom mb-4">Profile Info</legend>       
+        <legend class="border-bottom mb-4"><h4>Profile Info </h4></legend>       
          <div class="media-body">
             <h2 class="account-heading" >Username: {{ user.username }}</h2>
             <h3>First Name: {{ request.user.first_name }}</h3>
@@ -18,7 +18,9 @@
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Blog</legend>
+            <legend class="border-bottom mb-4"><h4>Blog </h4></legend>
+            
+            <a href="{% url 'blog_app:addpost' %}" class="btn btn-info ">Add Post </a>
             {{ u_form }} <!-- User form -->
             {{ p_form }} <!-- Profile form -->
         </fieldset>

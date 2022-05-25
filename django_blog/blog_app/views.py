@@ -76,6 +76,8 @@ def user_profile(request):
     post_dict = {'post_list': queryset}
     return render(request, 'blog_app/user_profile.html', context=post_dict)
 
+
+
 @login_required
 def user_logout(request):
     logout(request)

@@ -25,14 +25,23 @@
         
     </form>
     </div >
+<div class="container mt-5 mb-3">
+    <div class="row">
+        <div class="card shadow " style="width: 40rem; height: 30rem;" >
+        <img src="{{ post.author.userprofileinfo.profile_pic.url }}" class="card-img-top" alt="..." height="180px">
+            <div class="card-body" >
+            <h2>Title: {{ post.title }}</h2>
+            <small>By: {{ post.author }}</small><br>
+            <hr>
+            <br>
+            {{ post.content }}
+            <br>
 
-<h2>Title: {{ post.title }}</h2>
-<small>By: {{ post.author }}</small><br>
-<hr>
-<br>
-{{ post.content }}
-<br>
-
- <a href="{% url 'user_profile' %}">Go Back to profile</a>
-<hr>
+            
+            <hr>
+            <a href="{% url 'user_profile' %}">Go Back to profile</a>
+</div>
+</div>
+</div>
+</div>
 {% endblock %}

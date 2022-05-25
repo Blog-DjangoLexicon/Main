@@ -20,6 +20,7 @@
       <legend class="border-bottom mb-4"><h4>Delete Post</h4></legend>
 <br><br>
     <form enctype="multipart/form-data" method="POST">
+    <h5>  Author: {{ user.username }} </h5>
     {% csrf_token %}
         {{ post_form.as_p }}
         <button class="btn btn-md btn-success btn-block" type="submit">Update</button>

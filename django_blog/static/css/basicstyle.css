@@ -16,3 +16,18 @@ h4 {
 h2 {
     color:rgb(22, 150, 86);
 }
+
+#footer {
+
+   position: fixed;
+    bottom: 0;
+    width: 100%;
+    
+  
+}
+#content-wrap {
+    margin-bottom: 50px;
+    margin-top: 50px;
+    position: relative;
+    padding-bottom: 10rem;   /* Footer height */
+}

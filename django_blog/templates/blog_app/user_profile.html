@@ -5,8 +5,9 @@
 {% block content %}
     <div class="content-section">
       <div class="media">
-        <legend class="border-bottom mb-4">Profile Info</legend>        <div class="media-body">
-            <h2 class="account-heading" style="color:rgb(22, 150, 86);">Username: {{ user.username }}</h2>
+        <legend class="border-bottom mb-4">Profile Info</legend>       
+         <div class="media-body">
+            <h2 class="account-heading" >Username: {{ user.username }}</h2>
             <h3>First Name: {{ request.user.first_name }}</h3>
             <h3>Last Name: {{ request.user.last_name }}</h3>
             <p class="text-secondary">{{ user.email }}</p>
@@ -32,11 +33,11 @@
   <div class="row">
     {% for post in post_list %}
     <div class="card shadow " style="width: 20rem; height: 30rem;" >
-          <img src="{{ user.userprofileinfo.profile_pic.url }}" class="card-img-top" alt="..." height="250px">
+          <img src="{{ post.author.userprofileinfo.profile_pic.url }}" class="card-img-top" alt="..." height="250px">
 
           <div class="card-body" style="overflow:hidden;">
             <h5 class="card-title">{{post.title}} <br><small>by {{post.author}}</small></h5>
-            <p class="card-text">{{ post.content }} </p>
+            <p class="card-text">{{ post.content | truncatechars:50}}</p>
             
           </div>
           <a href="{% url 'blog_app:article' post.id %}">Read More</a>
@@ -46,7 +47,7 @@
           <div class="d-flex flex-row justify-content-end mt-auto">
             <a href="{% url 'blog_app:editpost' post.id %}" class="btn btn-primary d-flex justify-content-end">Edit Post <a href="{% url 'blog_app:deletepost' post.id %}" class="btn btn-danger mx-4">Delete</a></a>
             </div> 
-{% endif %}
+          {% endif %}
             <p class="card-text"><small class="text-muted">Created on {{ post.created_on }}</small></p>
           </div>
 

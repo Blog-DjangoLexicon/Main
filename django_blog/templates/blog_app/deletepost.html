@@ -31,7 +31,8 @@
             <br>
             {{ post.content }}
             <br>
-
+        {% csrf_token %}
+        
             
             <hr>
           <button class="btn btn-md btn-success btn-block" type="submit">Delete</button>

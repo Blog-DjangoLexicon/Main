@@ -1,3 +1,4 @@
+from ast import arg
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -49,4 +50,4 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('user_profile')
+        return reverse('article', args=(str(self.id)))

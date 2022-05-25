@@ -1,11 +1,38 @@
 {% extends "blog_app/base.html" %}
 
-{% load staticfiles %}
+
 
 {% block content %}
-<h2> {{ post.title }}</h2>
-<small>By: {{ post.author.first_name }}</small><br>
+    <div class="content-section">
+      <div class="media">
+        <legend class="border-bottom mb-4">Profile Info</legend>        <div class="media-body">
+            <h2 class="account-heading" style="color:rgb(22, 150, 86);">Username: {{ user.username }}</h2>
+            <h3>First Name: {{ request.user.first_name }}</h3>
+            <h3>Last Name: {{ request.user.last_name }}</h3>
+            <p class="text-secondary">{{ user.email }}</p>
+            <img class="rounded-circle article-img" src="{{ user.userprofileinfo.profile_pic.url }}" width='240' alt={{user}}>
+        </div>
+      </div>
+      <!-- FORM HERE -->
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Blog</legend>
+            {{ u_form }} <!-- User form -->
+            {{ p_form }} <!-- Profile form -->
+        </fieldset>
+        
+        
+    </form>
+    </div >
+
+<h2>Title: {{ post.title }}</h2>
+<small>By: {{ post.author }}</small><br>
 <hr>
 <br>
 {{ post.content }}
+<br>
+
+ <a href="{% url 'user_profile' %}">Go Back to profile</a>
+<hr>
 {% endblock %}

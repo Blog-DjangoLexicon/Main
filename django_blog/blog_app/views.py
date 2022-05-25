@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from blog_app.forms import UserForm, UserProfileInfoForm, PostForm
 from blog_app.models import Post
-#from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import  DetailView
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -11,9 +11,9 @@ from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 
-# class ArticleDetailView(DetailView):
-#     model = Post
-#     template_name = 'blog_app/article.html'
+class ArticleDetailView(DetailView):
+    model = Post
+    template_name = 'blog_app/article.html'
     
 
 # class AddPostView(CreateView):

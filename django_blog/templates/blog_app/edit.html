@@ -7,7 +7,7 @@
 
 <div class="content-section">
       <div class="media">
-        <legend class="border-bottom mb-4">Profile Info</legend>
+        <legend class="border-bottom mb-4"><h4>Profile Info </h4></legend>
         <div class="media-body">
             <h2 class="account-heading" >Username: {{ user.username }}</h2>
             <h3>First Name: {{ request.user.first_name }}</h3>
@@ -17,7 +17,7 @@
         </div>
       </div>
       <!-- FORM HERE -->
-      <legend class="border-bottom mb-4"><h4>Delete Post</h4></legend>
+      <legend class="border-bottom mb-4"><h4>Edit Post</h4></legend>
 <br><br>
     <form enctype="multipart/form-data" method="POST">
     <h5>  Author: {{ user.username }} </h5>

@@ -4,14 +4,29 @@
 {% load staticfiles %}
 
 {% block content %}
-<h1>Update Post ... </h1>
-<br><br>
-<form enctype="multipart/form-data" method="POST">
-{% csrf_token %}
-    {{ post_form.as_p }}
-    <button class="btn btn-md btn-success btn-block" type="submit">Update</button>
 
-</form>
+<div class="content-section">
+      <div class="media">
+        <legend class="border-bottom mb-4">Profile Info</legend>
+        <div class="media-body">
+            <h2 class="account-heading" >Username: {{ user.username }}</h2>
+            <h3>First Name: {{ request.user.first_name }}</h3>
+            <h3>Last Name: {{ request.user.last_name }}</h3>
+            <p class="text-secondary">{{ user.email }}</p>
+            <img class="rounded-circle article-img" src="{{ user.userprofileinfo.profile_pic.url }}" width='240' alt={{user}}>
+        </div>
+      </div>
+      <!-- FORM HERE -->
+      <legend class="border-bottom mb-4"><h4>Delete Post</h4></legend>
+<br><br>
+    <form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+        {{ post_form.as_p }}
+        <button class="btn btn-md btn-success btn-block" type="submit">Update</button>
+
+    </form>
+</div >
+
 <div class="jumbotron">
 
     
@@ -19,3 +34,4 @@
 
 
 {% endblock %}
+

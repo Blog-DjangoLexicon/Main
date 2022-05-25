@@ -23,3 +23,5 @@ class PostForm(forms.ModelForm):
         model = Post
         exclude = ['author']
         fields = ['title',  'content', 'status']
+        #fields = ['title',  'content', 'status',  'image']
+

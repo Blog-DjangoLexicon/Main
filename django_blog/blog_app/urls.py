@@ -12,4 +12,8 @@ urlpatterns = [
     url(r'^addpost/$', views.addpost, name="addpost"),
     #url(r'^article/(?P<pk>\d+)/$', ArticleDetailView.as_view(), name="article"),
     #url(r'^addpost/$', AddPostView.as_view(), name="addpost"),
+    url(r'^editpost/(?P<id>[0-9]+)/$', views.editpost, name="editpost"),
+    url(r'^deletepost/(?P<id>[0-9]+)/$', views.deletepost, name="deletepost"),
+
+
 ]

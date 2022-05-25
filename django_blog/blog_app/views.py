@@ -44,6 +44,26 @@ def addpost(request):
 
     return render (request, 'blog_app/addpost.html', {'post_form':post_form,})
 
+#function to delete 
+def deletepost(request,id):
+    posts = Post.objects.get(id=id)
+    if request.method == "POST":
+        posts.delete()
+        return redirect('user_profile')
+    return render (request, 'blog_app/deletepost.html', {'post':posts})
+
+
+#function to edit
+def editpost(request, id):
+    post = Post.objects.get(id=id)
+    blog=PostForm(instance=post)
+    if request.method=="POST":
+        post_form = PostForm(data=request.POST, instance=post)
+        if post_form.is_valid():
+            post_form.save()
+            return redirect( 'user_profile')
+    return render(request, "blog_app/edit.html", {'post_form':blog,})
+
 
 
 def index(request):
@@ -125,6 +145,8 @@ def user_login(request):
 
     else:
         return render(request, 'blog_app/login.html')
+
+
 
 
 

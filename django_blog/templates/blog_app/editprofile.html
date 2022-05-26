@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends "blog_app/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<legend class="border-bottom mb-4"><h2>Current Profile Info </h2></legend>       
+
+        <form enctype="multipart/form-data" method="POST">
+        
+            <h5>First Name: {{ request.user.first_name }}</h5>
+            <h5>Last Name: {{ request.user.last_name }}</h5>
+            <h5 >Username: {{ user.username }}</h5>
+            <h5>{{ user.email }}</h5>
+            <br>
+            
+            <legend class="border-bottom mb-4"><h2>Update profile</h2></legend>       
+            
+            {% csrf_token %}
+            {{ user_form.as_p}}
+            
+
+            <input type="submit" class="btn btn-success" value="Update">
+        </form>
+
+
+
+{% endblock %}
+

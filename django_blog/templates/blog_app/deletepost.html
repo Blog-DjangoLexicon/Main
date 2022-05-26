@@ -12,7 +12,7 @@
             <h2 class="account-heading" >Username: {{ user.username }}</h2>
             <h3>First Name: {{ request.user.first_name }}</h3>
             <h3>Last Name: {{ request.user.last_name }}</h3>
-            <p class="text-secondary">{{ user.email }}</p>
+            <h5>Email: {{ user.email }}</h5>
             <img class="rounded-circle article-img" src="{{ user.userprofileinfo.profile_pic.url }}" width='240' alt={{user}}>
         </div><br><br>
       </div>
@@ -26,12 +26,13 @@
         
             <div class="card-body" >
             <h2>Title: {{ post.title }}</h2>
-            <small>By: {{ post.author }}</small><br>
+            <small>Author: You</small><br>
             <hr>
             <br>
             {{ post.content }}
             <br>
-
+        {% csrf_token %}
+        
             
             <hr>
           <button class="btn btn-md btn-success btn-block" type="submit">Delete</button>

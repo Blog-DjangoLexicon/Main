@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from blog_app.forms import UserForm, UserProfileInfoForm, PostForm
-from blog_app.models import Post
+from blog_app.forms import UserForm, UserProfileInfoForm, PostForm, UpdateUserForm
+from blog_app.models import Post,UserProfileInfo
 from django.views.generic import  DetailView
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from blog_app.models import Post
 from django.core.files.storage import FileSystemStorage
+
 
 # Create your views here.
 
@@ -64,6 +65,17 @@ def editpost(request, id):
             return redirect( 'user_profile')
     return render(request, "blog_app/edit.html", {'post_form':blog,})
 
+
+def editprofile(request, id):
+    user = UserProfileInfo.objects.get(id=id)
+    userpro =UpdateUserForm(instance=user)
+
+    if request.method=="POST":
+        user_form = UpdateUserForm(data=request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+            return redirect( 'user_profile')
+    return render(request, "blog_app/editprofile.html", {'user_form':userpro})
 
 
 def index(request):

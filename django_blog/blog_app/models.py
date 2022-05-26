@@ -30,6 +30,9 @@ class UserProfileInfo(models.Model):
     def __str__(self):
         return self.user.username
 
+    def get_absolute_url(self):
+        return reverse('editprofile', args=(str(self.id)))
+
 
 class Post(models.Model):
     

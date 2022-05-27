@@ -29,13 +29,12 @@ class ArticleDetailView(DetailView):
 def addpost(request):
 
     if request.method == 'POST':
-        post_form = PostForm(data=request.POST)
+        post_form = PostForm(data=request.POST, files=request.FILES)
 
         if post_form.is_valid():
-            post_form.save(commit=False)
-            post_form.instance.author = request.user
-            post_form.save()
-
+            blogpost = post_form.save(commit=False)
+            blogpost.author = request.user
+            blogpost.save()
             return redirect( 'user_profile')
     
         else:
@@ -59,23 +58,37 @@ def editpost(request, id):
     post = Post.objects.get(id=id)
     blog=PostForm(instance=post)
     if request.method=="POST":
-        post_form = PostForm(data=request.POST, instance=post)
+        post_form = PostForm(request.POST, request.FILES, instance=post)
         if post_form.is_valid():
             post_form.save()
             return redirect( 'user_profile')
-    return render(request, "blog_app/edit.html", {'post_form':blog,})
+    return render(request, "blog_app/editpost.html", {'blog':post,})
+#for search 
+def searchpost(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        blogs = Post.objects.filter(title__contains=searched)
+        post_dict = {'post_list': blogs}
 
+        return render(request, 'blog_app/user_profile.html', post_dict, {'searched':searched, 'blogs':blogs})
+    else:
+        return render(request, "blog_app/user_profile.html", {})
 
-def editprofile(request, id):
-    user = UserProfileInfo.objects.get(id=id)
+#function to edit profile
+def editprofile(request):
+    user = request.user
     userpro =UpdateUserForm(instance=user)
+    profile_form = UserProfileInfoForm(instance=request.user.userprofileinfo)
 
     if request.method=="POST":
         user_form = UpdateUserForm(data=request.POST, instance=request.user)
+        profile_form = UserProfileInfoForm(request.POST, request.FILES, instance=request.user.userprofileinfo)
+
         if user_form.is_valid():
             user_form.save()
+            profile_form.save()
             return redirect( 'user_profile')
-    return render(request, "blog_app/editprofile.html", {'user_form':userpro})
+    return render(request, "blog_app/editprofile.html", {'user_form':userpro, 'profile_form': profile_form})
 
 
 def index(request):
@@ -96,7 +109,6 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('index'))
 
 def register(request):
-
     registered = False
 
     if request.method == 'POST':
@@ -115,7 +127,6 @@ def register(request):
             #     profile.profile_pic = request.FILES['profile_pic']
 
             # profile.save()
-
             image = request.FILES['profile_pic']
             if image:
                 filename = FileSystemStorage().save('profile_pics/' + image.name, image)

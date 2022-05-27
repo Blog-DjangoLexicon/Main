@@ -5,52 +5,53 @@
 
 {% block content %}
 
-<div class="content-section">
-      <div class="media">
-        <legend class="border-bottom mb-4"><h4>Profile Info </h4></legend>
-        <div class="media-body">
-            <h2 class="account-heading" >Username: {{ user.username }}</h2>
-            <h3>First Name: {{ request.user.first_name }}</h3>
-            <h3>Last Name: {{ request.user.last_name }}</h3>
-            <h5>Email: {{ user.email }}</h5>
-            <img class="rounded-circle article-img" src="{{ user.userprofileinfo.profile_pic.url }}" width='240' alt={{user}}>
-        </div><br><br>
-      </div>
-      <!-- FORM HERE -->
-      <legend class="border-bottom mb-4"><h4>Delete Post</h4></legend>
-<br><br>
-    <form action="{% url 'blog_app:deletepost' post.id %}" method="POST">
-    <div class="container mt-5 mb-3">
-    <div class="row">
-        <div class="card shadow " style="width: 30rem; height: 40rem;" >
-        
-            <div class="card-body" >
-            <h2>Title: {{ post.title }}</h2>
-            <small>Author: You</small><br>
-            <hr>
-            <br>
-            {{ post.content }}
-            <br>
-        {% csrf_token %}
-        
-            
-            <hr>
-          <button class="btn btn-md btn-success btn-block" type="submit">Delete</button>
-        <a href='/user_profile' class="btn btn-danger">Cancel</a>
-</div>
-</div>
-</div>
-</div>
+<div class="login-form login blog-post">
+    <header class=" login--header register--header text-center">
+        <img src="{{ post.blog_pic.url }}" width="80" height="80" class="rounded-circle">
+        <h3 >Auther: {{ user.first_name }} {{ user.last_name }}</h3>
+        <span class="arrow-down login--header__arrow"></span>
+    </header>
+  <form action="{% url 'blog_app:deletepost' post.id %}" method="POST">
+    {% csrf_token %}
 
-       
-    </form>
-</div >
+    <div class="form-group text-left">
+        <label>Title:</label>
+        <input type="text" class="form-control" placeholder="Title" name="title" value="{{ post.title }}">
+    </div>
 
-<div class="jumbotron">
-
+    <div class="form-group text-left"> 
+        <label>Content:</label>
+        <p class="form-control card-text">{{ post.content | truncatechars:50}}</p>
+    </div>
     
+    <div class="row form-check d-flex ">
+        <div class="form-group">
+            <label for="id_status">Status:</label>
+        </div>
+    
+        <div class="col-xs-6 col-sm-6 col-md-6">
+           <div >
+             <select class="form-control" name="status" id="id_status" disabled >
+                 <option value="0" {% if post.status == 0 %}selected{% endif %}>Draft</option>
+                 <option value="1" {% if post.status == 1 %}selected{% endif %}>Published</option>
+             </select>
+           </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:20px;">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <button type="submit" class="form-control btn btn-primary btn-block">Delete</button>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <a href='/user_profile' class="form-control btn btn-danger btn-block">Cancel</a>
+            </div>
+        </div>
+    </div>
+</form>
 </div>
-
 
 {% endblock %}
 

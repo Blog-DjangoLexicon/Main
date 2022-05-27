@@ -5,35 +5,65 @@
 
 {% block content %}
 
-<div class="content-section">
-      <div class="media">
-        <legend class="border-bottom mb-4"><h4>Profile Info </h4></legend>
-        <div class="media-body">
-            <h2 class="account-heading" >Username: {{ user.username }}</h2>
-            <h3>First Name: {{ request.user.first_name }}</h3>
-            <h3>Last Name: {{ request.user.last_name }}</h3>
-            <h5>Email: {{ user.email }}</h5>
-            <img class="rounded-circle article-img" src="{{ user.userprofileinfo.profile_pic.url }}" width='240' alt={{user}}>
+<div class="login-form login blog-post">
+    <header class=" login--header register--header text-center">
+        <img src="{{ user.userprofileinfo.profile_pic.url }}" width="80" height="80" class="rounded-circle">
+        <h3 >Author: {{ user.first_name }} {{ user.last_name }}</h3>
+        <span class="arrow-down login--header__arrow"></span>
+    </header>
+    <form action="{% url 'blog_app:addpost'%}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Title" name="title">
+            </div>
         </div>
-      </div>
-      <!-- FORM HERE -->
-      <legend class="border-bottom mb-4"><h4>Add Post</h4></legend>
-<br><br>
-    <form enctype="multipart/form-data" method="POST">
-    <h5>  Author: {{ user.username }} </h5>
-    {% csrf_token %}
-        {{ post_form.as_p }}
-        <button class="btn btn-md btn-success btn-block" type="submit">Post</button>
+
+        <div class="form-group text-left"> 
+            <label>Content:</label>
+            <textarea class="form-control" id="content" name="content" rows="5"></textarea>
+        </div>
         
+        <div class="row form-check d-flex ">
+            <div class="form-group">
+                <label for="id_status">Status:</label>
+            </div>
+        
+            <div class="col-xs-6 col-sm-6 col-md-6">
+               <div >
+                 <select class="form-control" name="status" id="id_status" >
+                     <option value="0" selected>Draft</option>
+                     <option value="1">Published</option>
+                 </select>
+               </div>
+            </div>
+        </div>
+        <div class="row form-check d-flex ">
+            <div class="form-group">
+                <label class="form-check-label" style="margin-top:-2px" for="id_blog_pic">Post Picture:</label>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div >
+                 <input type="file" name="blog_pic" id="id_blog_pic">
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:20px;">
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-primary btn-block">Post</button>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <a href='/user_profile' class="form-control btn btn-danger btn-block">Cancel</a>
+                </div>
+            </div>
+        </div>
     </form>
-        
-
-</div >
-
-<div class="jumbotron">
-
-    
 </div>
+
 
 
 {% endblock %}

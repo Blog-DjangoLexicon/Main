@@ -26,6 +26,5 @@ class PostForm(forms.ModelForm):
     class Meta():
         model = Post
         exclude = ['author']
-        fields = ['title',  'content', 'status']
-        #fields = ['title',  'content', 'status',  'image']
+        fields = ['title',  'content', 'status',  'blog_pic']
 

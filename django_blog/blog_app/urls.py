@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^article/(?P<pk>[0-9]+)/$', views.ArticleDetailView.as_view(), name="article"),
     url(r'^editpost/(?P<id>[0-9]+)/$', views.editpost, name="editpost"),
     url(r'^deletepost/(?P<id>[0-9]+)/$', views.deletepost, name="deletepost"),
-    url(r'^editprofile/(?P<id>[0-9]+)/$', views.editprofile, name="editprofile"),
+    url(r'^editprofile/$', views.editprofile, name="editprofile"),
+    url(r'^searchpost/$', views.searchpost, name="searchblog"),
 
 ]

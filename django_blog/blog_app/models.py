@@ -19,9 +19,9 @@ STATUS = (
 class UserProfileInfo(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(("First name"), max_length=50)
+    first_name = models.CharField( max_length=50)
 
-    last_name = models.CharField(("Last name"), max_length=50)
+    last_name = models.CharField( max_length=50)
     
     profile_pic = models.ImageField(upload_to = 'profile_pics', blank = True)
 
@@ -36,15 +36,15 @@ class UserProfileInfo(models.Model):
 
 class Post(models.Model):
     
-    #image = models.ImageField(upload_to="profile_pics", blank=True, null=True)
+    author = models.ForeignKey(User, editable=False, on_delete= models.CASCADE,related_name='blog_posts', null=True)
 
     title = models.CharField(max_length=200, unique=True)
-
-    author = models.ForeignKey(User, editable=False, on_delete= models.CASCADE,related_name='blog_posts', null=True)
 
     content = models.TextField()
 
     status = models.IntegerField(choices=STATUS, default=0)
+
+    blog_pic = models.ImageField(upload_to="blog_pics", blank=True, null=True)
 
     created_on = models.DateTimeField(auto_now_add=True)
 

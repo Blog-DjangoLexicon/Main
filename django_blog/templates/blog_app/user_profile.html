@@ -3,43 +3,12 @@
 
 
 {% block content %}
-    <div class="content-section">
-      <div class="media">
-        <legend class="border-bottom mb-4"><h4>Profile Info </h4></legend>       
-         <div class="media-body">
-            <h2 class="account-heading" >Username: {{ user.username }}</h2>
-            <h3>First Name: {{ request.user.first_name }}</h3>
-            <h3>Last Name: {{ request.user.last_name }}</h3>
-            <h5>Email: {{ user.email }}</h5>
-            <img class="rounded-circle article-img" src="{{ user.userprofileinfo.profile_pic.url }}" width='240' alt={{user}}>
-        </div>
-      </div>
-      <a href="{% url 'blog_app:editprofile' user.id %}" class="btn btn-info ">Edit Profile </a>
-      <!-- FORM HERE -->
-      <br><br><br>
-      <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4"><h4>Blog </h4></legend>
-            
-
-            <a href="{% url 'blog_app:addpost' %}" class="btn btn-info ">Add Post </a>
-            
-            {{ u_form }} <!-- User form -->
-            {{ p_form }} <!-- Profile form -->
-        </fieldset>
-        
-        
-    </form>
-    </div >
-
-
-    
+<a class='btn btn-primary btn-rounded btn-icon pull-right btn-lg' href="{% url 'blog_app:addpost'%}"> <i class="fa fa-pencil-square-o  "></i> </a>    
 <div class="container mt-5 mb-3">
   <div class="row">
     {% for post in post_list %}
     <div class="card shadow " style="width: 20rem; height: 30rem;" >
-          <img src="{{ post.author.userprofileinfo.profile_pic.url }}" class="card-img-top" alt="..." height="250px">
+          <img src="{{ post.blog_pic.url }}" class="card-img-top" alt="..." height="250px">
 
           <div class="card-body" style="overflow:hidden;">
             <h5 class="card-title">{{post.title}} <br><small>by {{post.author}}</small></h5>

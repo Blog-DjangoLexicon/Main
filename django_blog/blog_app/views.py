@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from blog_app.models import Post
 from django.core.files.storage import FileSystemStorage
+from django.db.models import Q
 
 
 # Create your views here.
@@ -67,7 +68,7 @@ def editpost(request, id):
 def searchpost(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        blogs = Post.objects.filter(title__contains=searched)
+        blogs = Post.objects.filter(Q(title__contains=searched) | Q(content__contains=searched))
         post_dict = {'post_list': blogs}
 
         return render(request, 'blog_app/user_profile.html', post_dict, {'searched':searched, 'blogs':blogs})

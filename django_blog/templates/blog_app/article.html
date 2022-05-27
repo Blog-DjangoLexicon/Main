@@ -1,46 +1,25 @@
 {% extends "blog_app/base.html" %}
-
-
-
 {% block content %}
-    <div class="content-section">
-        <legend class="border-bottom mb-4"><h4>Profile Info </h4></legend>        
-        <div class="media-body">
-            <h2 class="account-heading" >Username: {{ user.username }}</h2>
-            <h3>First Name: {{ request.user.first_name }}</h3>
-            <h3>Last Name: {{ request.user.last_name }}</h3>
-            <h5>Email: {{ user.email }}</h5>
-            <img class="rounded-circle article-img" src="{{ user.userprofileinfo.profile_pic.url }}" width='240' alt={{user}}>
-      </div>
-      <!-- FORM HERE -->
-      <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Blog</legend>
-            {{ u_form }} <!-- User form -->
-            {{ p_form }} <!-- Profile form -->
-        </fieldset>
-        
-        
-    </form>
-    </div >
 <div class="container mt-5 mb-3">
     <div class="row">
-        <div class="card shadow " style="width: 40rem; height: 30rem;" >
-        <img src="{{ post.author.userprofileinfo.profile_pic.url }}" class="card-img-top" alt="..." height="180px">
-            <div class="card-body" >
-            <h2>Title: {{ post.title }}</h2>
-            <small>By: {{ post.author }}</small><br>
-            <hr>
+        <div class="card shadow " style="width: 30rem; height: 40rem;" >
+        <img src="{{ post.blog_pic.url }}" class="card-img-top" alt="..." height="250px">
+        <div class="card-body" style="overflow:hidden;">
+            <h5 class="card-title">{{post.title}} <br><small>by {{post.author}}</small></h5>
+            <p class="card-text">{{ post.content}}</p>
             <br>
-            {{ post.content }}
-            <br>
-
-            
             <hr>
+            </div>
             <a href="{% url 'user_profile' %}">Go Back to profile</a>
-</div>
-</div>
-</div>
+            <div class="card-footer" style="border-top:none">
+                {% if post.author.id == request.user.id %}
+              <div class="d-flex flex-row justify-content-end mt-auto">
+                <a href="{% url 'blog_app:editpost' post.id %}" class="btn btn-primary d-flex justify-content-end">Edit Post <a href="{% url 'blog_app:deletepost' post.id %}" class="btn btn-danger mx-4">Delete</a></a>
+                </div> 
+              {% endif %}
+                <p class="card-text"><small class="text-muted">Created on {{ post.created_on }}</small></p>
+              </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

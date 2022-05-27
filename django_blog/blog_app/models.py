@@ -38,7 +38,7 @@ class Post(models.Model):
     
     author = models.ForeignKey(User, editable=False, on_delete= models.CASCADE,related_name='blog_posts', null=True)
 
-    title = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200)
 
     content = models.TextField()
 
